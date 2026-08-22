@@ -69,4 +69,3 @@ enum AbyssRiftRune
 		return BY_OBJECT_ID.get(objectId);
 	}
 }
-

@@ -135,4 +135,3 @@ class AbyssRiftRuneHighlighterOverlay extends Overlay
 			&& object.getPlane() == activeWorldView.getPlane();
 	}
 }
-

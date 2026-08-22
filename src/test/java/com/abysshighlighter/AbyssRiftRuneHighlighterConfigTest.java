@@ -21,4 +21,3 @@ public class AbyssRiftRuneHighlighterConfigTest
 		assertEquals("abyss-rift-rune-highlighter", AbyssRiftRuneHighlighterConfig.CONFIG_GROUP);
 	}
 }
-

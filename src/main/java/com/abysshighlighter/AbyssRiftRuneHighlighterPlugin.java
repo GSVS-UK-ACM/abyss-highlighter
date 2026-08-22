@@ -81,4 +81,3 @@ public class AbyssRiftRuneHighlighterPlugin extends Plugin
 		return Collections.unmodifiableSet(trackedAbyssRifts);
 	}
 }
-

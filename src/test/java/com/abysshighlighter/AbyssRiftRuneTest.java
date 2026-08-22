@@ -57,4 +57,3 @@ public class AbyssRiftRuneTest
 		assertEquals(displayName, rift.getDisplayName());
 	}
 }
-

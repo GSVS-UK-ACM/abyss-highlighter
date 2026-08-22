@@ -69,4 +69,3 @@ public interface AbyssRiftRuneHighlighterConfig extends Config
 		return Color.WHITE;
 	}
 }
-
