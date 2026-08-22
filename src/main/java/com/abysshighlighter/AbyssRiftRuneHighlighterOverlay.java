@@ -1,5 +1,6 @@
 package com.abysshighlighter;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -29,6 +30,9 @@ class AbyssRiftRuneHighlighterOverlay extends Overlay
 	private final AbyssRiftRuneHighlighterPlugin plugin;
 	private final AbyssRiftRuneHighlighterConfig config;
 	private final Map<Integer, BufferedImage> runeImages = new HashMap<>();
+	private Font cachedBaseFont;
+	private Font cachedLabelFont;
+	private int cachedFontSize = -1;
 
 	@Inject
 	AbyssRiftRuneHighlighterOverlay(
@@ -54,17 +58,43 @@ class AbyssRiftRuneHighlighterOverlay extends Overlay
 			return null;
 		}
 
-		for (DecorativeObject object : plugin.getTrackedAbyssRifts())
+		boolean showNames = config.showRuneNames();
+		int iconSize = config.iconSize();
+		int heightOffset = config.heightOffset();
+		Color nameColor = showNames ? config.nameColor() : null;
+		Font originalFont = graphics.getFont();
+		if (showNames)
 		{
-			if (isInActiveWorldView(object))
+			graphics.setFont(getLabelFont(originalFont, config.fontSize()));
+		}
+
+		try
+		{
+			for (DecorativeObject object : plugin.getTrackedAbyssRifts())
 			{
-				renderRune(graphics, object);
+				if (isInActiveWorldView(object))
+				{
+					renderRune(graphics, object, iconSize, heightOffset, showNames, nameColor);
+				}
+			}
+		}
+		finally
+		{
+			if (showNames)
+			{
+				graphics.setFont(originalFont);
 			}
 		}
 		return null;
 	}
 
-	private void renderRune(Graphics2D graphics, DecorativeObject object)
+	private void renderRune(
+		Graphics2D graphics,
+		DecorativeObject object,
+		int iconSize,
+		int heightOffset,
+		boolean showNames,
+		Color nameColor)
 	{
 		AbyssRiftRune rift = AbyssRiftRune.fromObjectId(object.getId());
 		if (rift == null)
@@ -85,39 +115,54 @@ class AbyssRiftRuneHighlighterOverlay extends Overlay
 			client,
 			object.getLocalLocation(),
 			image,
-			config.heightOffset()
+			heightOffset
 		);
 		if (originalLocation == null)
 		{
 			return;
 		}
 
-		int iconSize = config.iconSize();
 		int centerX = originalLocation.getX() + image.getWidth() / 2;
 		int centerY = originalLocation.getY() + image.getHeight() / 2;
 		int iconX = centerX - iconSize / 2;
 		int iconY = centerY - iconSize / 2;
 		graphics.drawImage(image, iconX, iconY, iconSize, iconSize, null);
 
-		if (config.showRuneNames())
+		if (showNames)
 		{
-			renderName(graphics, rift.getDisplayName(), centerX, iconY + iconSize);
+			renderName(graphics, rift.getDisplayName(), centerX, iconY + iconSize, nameColor);
 		}
 	}
 
-	private void renderName(Graphics2D graphics, String name, int centerX, int iconBottom)
+	private void renderName(Graphics2D graphics, String name, int centerX, int iconBottom, Color nameColor)
 	{
-		Font originalFont = graphics.getFont();
-		graphics.setFont(originalFont.deriveFont(Font.BOLD, (float) config.fontSize()));
 		int textX = centerX - graphics.getFontMetrics().stringWidth(name) / 2;
 		int textY = iconBottom + LABEL_GAP + graphics.getFontMetrics().getAscent();
 		OverlayUtil.renderTextLocation(
 			graphics,
 			new Point(textX, textY),
 			name,
-			config.nameColor()
+			nameColor
 		);
-		graphics.setFont(originalFont);
+	}
+
+	private Font getLabelFont(Font baseFont, int fontSize)
+	{
+		if (cachedLabelFont == null || cachedFontSize != fontSize || !baseFont.equals(cachedBaseFont))
+		{
+			cachedBaseFont = baseFont;
+			cachedFontSize = fontSize;
+			cachedLabelFont = baseFont.deriveFont(Font.BOLD, (float) fontSize);
+		}
+		return cachedLabelFont;
+	}
+
+	void clearCaches()
+	{
+		runeImages.clear();
+		cachedBaseFont = null;
+		cachedLabelFont = null;
+		cachedFontSize = -1;
 	}
 
 	private boolean isInActiveWorldView(DecorativeObject object)

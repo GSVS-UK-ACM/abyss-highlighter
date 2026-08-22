@@ -24,6 +24,7 @@ import net.runelite.client.ui.overlay.OverlayManager;
 public class AbyssRiftRuneHighlighterPlugin extends Plugin
 {
 	private final Set<DecorativeObject> trackedAbyssRifts = new HashSet<>();
+	private final Set<DecorativeObject> trackedAbyssRiftsView = Collections.unmodifiableSet(trackedAbyssRifts);
 
 	@Inject
 	private OverlayManager overlayManager;
@@ -47,6 +48,7 @@ public class AbyssRiftRuneHighlighterPlugin extends Plugin
 	protected void shutDown()
 	{
 		overlayManager.remove(overlay);
+		overlay.clearCaches();
 		trackedAbyssRifts.clear();
 	}
 
@@ -78,6 +80,6 @@ public class AbyssRiftRuneHighlighterPlugin extends Plugin
 
 	Set<DecorativeObject> getTrackedAbyssRifts()
 	{
-		return Collections.unmodifiableSet(trackedAbyssRifts);
+		return trackedAbyssRiftsView;
 	}
 }
