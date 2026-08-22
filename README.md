@@ -22,7 +22,8 @@ input, send network requests, or interact with the game automatically.
 ## Configuration
 
 - **Show rune names** — displays the rune name beneath its icon.
-- **Icon size** — scales world-space rune icons from 20 to 64 pixels.
+- **Icon size** — scales world-space rune icons from 24 to 72 pixels.
+- **Font size** — scales rune-name labels independently from the icons.
 - **Height offset** — moves the icon stack vertically above each rift.
 - **Name colour** — changes the optional label colour.
 

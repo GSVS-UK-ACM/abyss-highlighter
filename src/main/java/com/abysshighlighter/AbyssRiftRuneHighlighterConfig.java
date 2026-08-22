@@ -22,7 +22,7 @@ public interface AbyssRiftRuneHighlighterConfig extends Config
 		return true;
 	}
 
-	@Range(min = 20, max = 64)
+	@Range(min = 24, max = 72)
 	@ConfigItem(
 		keyName = "iconSize",
 		name = "Icon size",
@@ -31,7 +31,19 @@ public interface AbyssRiftRuneHighlighterConfig extends Config
 	)
 	default int iconSize()
 	{
-		return 32;
+		return 40;
+	}
+
+	@Range(min = 10, max = 24)
+	@ConfigItem(
+		keyName = "fontSize",
+		name = "Font size",
+		description = "Size of rune names beneath the icons",
+		position = 2
+	)
+	default int fontSize()
+	{
+		return 14;
 	}
 
 	@Range(min = 80, max = 300)
@@ -39,18 +51,18 @@ public interface AbyssRiftRuneHighlighterConfig extends Config
 		keyName = "heightOffset",
 		name = "Height offset",
 		description = "Vertical position of rune icons above the rifts",
-		position = 2
+		position = 3
 	)
 	default int heightOffset()
 	{
-		return 170;
+		return 210;
 	}
 
 	@ConfigItem(
 		keyName = "nameColor",
 		name = "Name colour",
 		description = "Colour used for rune names",
-		position = 3
+		position = 4
 	)
 	default Color nameColor()
 	{

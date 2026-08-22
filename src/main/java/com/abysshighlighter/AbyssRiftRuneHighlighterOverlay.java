@@ -108,7 +108,7 @@ class AbyssRiftRuneHighlighterOverlay extends Overlay
 	private void renderName(Graphics2D graphics, String name, int centerX, int iconBottom)
 	{
 		Font originalFont = graphics.getFont();
-		graphics.setFont(originalFont.deriveFont(Font.BOLD));
+		graphics.setFont(originalFont.deriveFont(Font.BOLD, (float) config.fontSize()));
 		int textX = centerX - graphics.getFontMetrics().stringWidth(name) / 2;
 		int textY = iconBottom + LABEL_GAP + graphics.getFontMetrics().getAscent();
 		OverlayUtil.renderTextLocation(

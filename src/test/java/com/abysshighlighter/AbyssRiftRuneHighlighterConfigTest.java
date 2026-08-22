@@ -14,8 +14,9 @@ public class AbyssRiftRuneHighlighterConfigTest
 	public void usesReadableDefaults()
 	{
 		assertTrue(config.showRuneNames());
-		assertEquals(32, config.iconSize());
-		assertEquals(170, config.heightOffset());
+		assertEquals(40, config.iconSize());
+		assertEquals(14, config.fontSize());
+		assertEquals(210, config.heightOffset());
 		assertEquals(Color.WHITE, config.nameColor());
 		assertEquals("abyss-rift-rune-highlighter", AbyssRiftRuneHighlighterConfig.CONFIG_GROUP);
 	}
