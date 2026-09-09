@@ -9,6 +9,8 @@
 
 Spot the right Abyss exit with a matching rune icon above each rift. Add readable rune names or keep a compact icon-only view.
 
+![Rune icons and names above the Abyss exit rifts](docs/images/abyss-rifts-overview.png)
+
 ## Find your rune
 
 Labels cover all 13 exits: air, blood, body, chaos, cosmic, death, earth, fire, law, mind, nature, soul and water. The overlay works alongside RuneLite's built-in Runecraft clickbox and minimap overlays.
@@ -22,6 +24,8 @@ Labels cover all 13 exits: air, blood, body, chaos, cosmic, death, earth, fire, 
 | **Font size** | Scales names independently, from 10 to 24. | 14 |
 | **Height offset** | Moves labels above the rifts, from 80 to 300. | 210 |
 | **Name colour** | Changes the optional rune-name text. | White |
+
+![Abyss Rift Rune Highlighter settings](docs/images/abyss-settings.png)
 
 For a compact view, turn off names and reduce the icon size. For easier reading at your usual zoom, keep names enabled and adjust font size and height together.
 
