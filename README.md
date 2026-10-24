@@ -1,3 +1,9 @@
+<!-- GSVS-REPOSITORY-MIGRATION -->
+> **New repository home:** This project moved from `xboxnuker-rgb/abyss-highlighter` to
+> [GSVS-UK-ACM/abyss-highlighter](https://github.com/GSVS-UK-ACM/abyss-highlighter).
+> Existing GitHub links redirect here. Continue using this repository under its
+> organisation address. Existing local checkouts can keep their folders.
+
 # Abyss Rift Rune Highlighter
 
 <img src="icon.png" alt="Plugin icon" width="48" height="48">
